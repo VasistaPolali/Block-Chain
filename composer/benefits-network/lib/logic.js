@@ -167,5 +167,3 @@ function processClaimRequest(processClaim) {
 else {throw new Error('this transaction failed, claim Status is closed cannot process Claim.Contact '
   + processClaim.claim.federalAgency);}
 }
-
-
