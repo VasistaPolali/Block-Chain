@@ -1,0 +1,45 @@
+#transactions
+
+
+#Create Member
+
+
+  "$class": "org.example.biznet.Member",
+  "Id": "member1",
+  "memberType": "beneficiary",
+  "benefitEligibilityType": "health",
+  "name": "testname1",
+  "location": "la"
+}
+
+# create agency 
+{
+  "$class": "org.example.biznet.Agency",
+  "Id": "agency1",
+  "agencyType": "nodal",
+  "name": "testagency1",
+  "location": "la"
+}
+
+#Create provider
+
+{
+  "$class": "org.example.biznet.Agency",
+  "Id": "provider1",
+  "agencyType": "provider",
+  "name": "health provider",
+  "location": "la"
+}
+
+#Create Federal Agency
+
+{
+  "$class": "org.example.biznet.Agency",
+  "Id": "f1",
+  "agencyType": "Federal",
+  "name": "Federal Agency to process claims",
+  "location": "Washington D.C"
+}
+
+
+

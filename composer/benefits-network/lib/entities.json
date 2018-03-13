@@ -1,0 +1,85 @@
+
+{
+  "$class": "org.example.biznet.Member",
+  "Id": "m1",
+  "memberType": "beneficiary",
+  "benefitEligibilityType": "health",
+  "name": "testname1",
+  "location": "la"
+}
+
+
+{
+  "$class": "org.example.biznet.Agency",
+  "Id": "a1",
+  "agencyType": "nodal",
+  "name": "testagency1",
+  "location": "la"
+}
+
+
+{
+  "$class": "org.example.biznet.Agency",
+  "Id": "p1",
+  "agencyType": "provider",
+  "name": "health provider",
+  "location": "la"
+}
+
+
+{
+  "$class": "org.example.biznet.Benefit",
+  "benefitType": "health",
+  "benefitId": "b1",
+  "description": "health benefit"
+}
+
+
+{
+  "$class": "org.example.biznet.BenefitStatus",
+  "status": "requested",
+  "statusid": "bs1",
+  "description": "benefit requested",
+  "benefit": "resource:org.example.biznet.Benefit#b1",
+  "member": "resource:org.example.biznet.Member#m1",
+  "agency": "resource:org.example.biznet.Agency#a1"
+}
+
+//Benefit Status
+
+//Latest
+
+{
+  "$class": "org.example.biznet.BenefitStatus",
+  "status": "REQUESTED",
+  "Id": "bs5",
+  "statusUpdatedBy": "m1",
+  "description": "Requesting benefit",
+  "benefit": "resource:org.example.biznet.Benefit#b1",
+  "member": "resource:org.example.biznet.Member#m1",
+  "agency": "resource:org.example.biznet.Agency#a1"
+}
+
+//older
+{
+  "$class": "org.example.biznet.BenefitStatus",
+  "status": "open",
+  "Id": "bs2",
+  "statusUpdatedBy": "m1",
+  "description": "requested",
+  "provider": "p1",
+  "benefit": "resource:org.example.biznet.Benefit#b1",
+  "member": "resource:org.example.biznet.Member#m1",
+  "agency": "resource:org.example.biznet.Agency#a1"
+}
+
+
+{
+  "$class": "org.example.biznet.RequestBenefit",
+  "status": "open",
+  "provider": "p1",
+  "description": "Benefit request accepted.Please contact the provider.",
+  "benefitStatus": "resource:org.example.biznet.BenefitStatus#bs1",
+  "agency": "resource:org.example.biznet.Agency#a1",
+  "member": "resource:org.example.biznet.Member#m1"
+}

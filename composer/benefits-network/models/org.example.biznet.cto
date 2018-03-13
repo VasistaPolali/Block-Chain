@@ -1,0 +1,101 @@
+/**
+ * Write your model definitions here
+ */
+
+namespace org.example.biznet
+
+participant Member identified by Id {
+  o String Id
+  o String memberType
+  o String benefitEligibilityType
+  o String name
+  o String location
+}
+participant Agency identified by Id {
+  o String Id
+  o String agencyType
+  o String name
+  o String location
+}
+
+
+asset Benefit identified by benefitId {
+  o String benefitType
+  o String benefitId
+  o String description
+  
+}
+
+
+enum EndorseStatus{
+  o ENDORSED
+  o NOT_ENDORSED
+}
+
+
+asset BenefitStatus identified by Id {	
+  o BenefitStatusCodes status
+  o String Id
+  o String statusUpdatedBy
+  o String description
+  o String provider optional
+  --> Benefit benefit
+  --> Member member
+  --> Agency agency
+  
+}
+
+enum BenefitStatusCodes {
+  o OPEN
+  o REQUESTED
+  o CLOSE 
+  
+}
+
+asset EndorseAsset identified by Id {
+  o String Id
+  o EndorseStatus status 
+  o String EndorsedBy
+  o String description
+  o String benefitStatusId
+ 
+}
+enum CalimStatusCodes {
+  o OPEN
+  o CLOSED
+  
+}
+
+asset Claim identified by claimId {
+  --> BenefitStatus benefitStatus
+  --> Member benefeciary
+  --> Agency nodalagency
+  --> Agency claimant
+  --> Agency federalAgency
+  o String claimId
+  o String description
+  o CalimStatusCodes status
+  
+}
+
+transaction RequestBenefit {
+  o String status
+  o String statusUpdatedBy
+  o String provider
+  o String description 
+  --> BenefitStatus benefitStatus
+  --> Agency agency
+  --> Member member
+  
+
+}
+
+transaction ProcessClaim {
+  --> Claim claim
+}
+
+event eventMessage {
+  o String message
+
+}
+
