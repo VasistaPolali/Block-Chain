@@ -3,15 +3,17 @@
 Benfits-Network is a demonstration of a block chain implementation using the Hyperledger Composer.It is a template and can be adapted to other similar use cases for a Multi-Party Private Blockchain network.
 
 Hyperledger Composer is an application development framework which simplifies and expedites the creation of Hyperledger fabric blockchain applications.
+
 For moreinformation.Refer to below links.
 
 https://hyperledger-fabric.readthedocs.io/en/latest/
 
 https://hyperledger.github.io/composer/introduction/introduction
 
-To set up Development Environmnet to test teh network,access the link.
+To set up Development Environmnet to test the network,access the link.
 
 https://hyperledger.github.io/composer/installing/development-tools.html
+
 
 Benefits-Network is a private  Block Chain Network.It helps the Organisations at the Federal and State level to seamlessly provide benefits to eligible memebers,and also process claims from the 3rd party providers.All this is achieved by the use of  Smart Contarcts and maintaining the transactions in a Distribute Ledger.
 
