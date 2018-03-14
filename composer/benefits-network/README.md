@@ -1,5 +1,5 @@
 
-# A Private Block Chain Network.
+# A Private Block Chain Network with Hyperledger Composer.
 
 Benfits-Network is a demonstration of a block chain implementation using the Hyperledger Composer.It is a template and can be adapted to other similar use cases for a Multi-Party Private Blockchain network.
 
@@ -12,6 +12,7 @@ https://hyperledger-fabric.readthedocs.io/en/latest/
 https://hyperledger.github.io/composer/introduction/introduction
 
 To set up Development Environmnet follw the link.Import the benefits-netowrk.bna and test it.
+Once the business network is tested and in place, front-end applications can be created. Use the REST Server to automatically generate a REST API for a business network, and a skeleton generate Angular application using the Yeoman code generator.
 
 https://hyperledger.github.io/composer/installing/development-tools.html
 
@@ -210,3 +211,5 @@ The Smart Contract will be executed and Claim processed automatically.
  "timestamp": "2018-03-13T19:28:39.250Z"
 }
 ```
+
+
