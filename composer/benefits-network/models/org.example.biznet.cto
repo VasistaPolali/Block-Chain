@@ -98,4 +98,3 @@ event eventMessage {
   o String message
 
 }
-
