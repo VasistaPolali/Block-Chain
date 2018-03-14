@@ -10,7 +10,7 @@ https://hyperledger-fabric.readthedocs.io/en/latest/
 
 https://hyperledger.github.io/composer/introduction/introduction
 
-To set up Development Environmnet to test the network,access the link.
+To set up Development Environmnet follw the link.Import the benefits-netowrk.bna and test it.
 
 https://hyperledger.github.io/composer/installing/development-tools.html
 
