@@ -22,7 +22,7 @@ The use case of Benefits-Network is to help Organisations at the Federal and Sta
 Lets go through a basic implementation.
 Entities are created using the Composer Modeling Language.
 ```
-/models/org.example.biznet.cto
+models/org.example.biznet.cto
 ```
 Transaction logic is written in Java Script.
 ```
