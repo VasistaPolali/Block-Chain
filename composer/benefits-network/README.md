@@ -1,5 +1,6 @@
 
 # A Private Block Chain Network with Hyperledger Composer.
+Contact: vasistabhargava@gmail.com
 
 Benfits-Network is a demonstration of a block chain implementation using the Hyperledger Composer.It is a template and can be adapted to other similar use cases for a Multi-Party Private Blockchain network.
 
