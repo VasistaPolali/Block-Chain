@@ -20,7 +20,14 @@ https://hyperledger.github.io/composer/installing/development-tools.html
 The use case of Benefits-Network is to help Organisations at the Federal and State level to seamlessly provide benefits to eligible memebers,and also process claims from 3rd party service providers.All this is achieved by the use of  Smart Contarcts and maintaining the transactions in a Distributed Ledger.
 
 Lets go through a basic implementation.
-
+Entities are created using the Composer Modeling Language.
+```
+/models/org.example.biznet.cto
+```
+Transaction logic is written in Java Script.
+```
+lib/logic.js
+```
 First, let's create a beneficiary to claim the benefits called a member.
 
 ```
