@@ -17,13 +17,19 @@ Once the business network is tested and in place, front-end applications can be 
 https://hyperledger.github.io/composer/installing/development-tools.html
 
 
-The use case of Benefits-Network is to help Organisations at the Federal and State level to seamlessly provide benefits to eligible memebers,and also process claims from 3rd party service providers.All this is achieved by the use of  Smart Contarcts and maintaining the transactions in a Distributed Ledger.
+The use case of Benefits-Network is to help organisations at the Federal and State level to seamlessly provide benefits to eligible members,and also process claims from 3rd party service providers.All this is achieved by the use of  Smart Contarcts and maintaining the transactions in a Distributed Ledger.
 
-Lets go through a basic implementation.
+Let's go through a basic implementation.
 Entities are created using the Composer Modeling Language.
 ```
 models/org.example.biznet.cto
 ```
+A Buiness Network typically includes:
+Assets - To be traded in the business network.
+Participants - Members of the network in various capacities.
+Transactions - Update the Ledger with changes to assets and participants.
+Events- Emits Notifications on occurence of an event.
+
 Transaction logic is written in Java Script.
 ```
 lib/logic.js
@@ -37,20 +43,20 @@ First, let's create a beneficiary to claim the benefits called a member.
   "memberType": "beneficiary",
   "benefitEligibilityType": "health",
   "name": "testname1",
-  "location": "la"
+  "location": "los angeles"
 }
 ```
-Create an Agency at the reginal level to handle benefit requets from local memebers.
+Create an Agency at the regional level to handle benefit requets from local members.
 ```
 {
   "$class": "org.example.biznet.Agency",
   "Id": "regionalAgency1",
   "agencyType": "nodal",
   "name": "Health Benefit Agency",
-  "location": "la"
+  "location": "los angeles"
 }
 ```
-Create a 3rd party agency at the regional level to provide  benefit requets from local memebers.
+Create a 3rd party agency at the regional level to provide services to the beneficiaries.
 ```
 {
   "$class": "org.example.biznet.Agency",
@@ -60,7 +66,7 @@ Create a 3rd party agency at the regional level to provide  benefit requets from
   "location": "la"
 }
 ```
-Create a Federal  agency that processe the claims from the providers.
+Create a Federal  agency that processes the claims and pays the providers.
 ```
 {
   "$class": "org.example.biznet.Agency",
@@ -70,7 +76,7 @@ Create a Federal  agency that processe the claims from the providers.
   "location": "washington D.C"
 }
 ```
-Let's create an asset called Benfefit.
+Let's create an asset called Benefit.
 ```
 {
   "$class": "org.example.biznet.Benefit",
@@ -79,7 +85,7 @@ Let's create an asset called Benfefit.
   "description": "Qaurterly Health Checkup Benefit"
 }
 ```
-Add asset Transaction on the Block Chain.
+Add asset transaction in the Block Chain.
 ```
 {
  "$class": "org.hyperledger.composer.system.AddAsset",
@@ -109,10 +115,10 @@ Now the beneficiary creates an asset called Benefit Status to request benefit.
 }
 ```
 Assets are updated across the network using Tranactions.
-Once the Benfit is raised, the Reginal Agency in this case the Healt Department is notified.
-The Reginal Agency initiates a transaction on the benefit request and changes the status to "OPEN" and assigns a service provider.
+Once the Benfit request is raised, the Regional Agency in this case the Healt Department is notified.
+The Regional Agency initiates a transaction on the benefit request and changes the status to "OPEN" and assigns a service provider.
 The network validates for the following before adding the transaction to the Block Chain.
-1.)The benefit Status should not be in a CLOSED state.
+1.)The benefit status is not in CLOSE state.
 2.)Verify the Member exists in the network.
 3.)Member is eligible for this benefit.
 4.)Benefit type is valid.
@@ -144,7 +150,7 @@ Update Asset Transaction.
  "timestamp": "2018-03-11T23:27:08.406Z"
 }
 ```
-Once the Service has been provided an other asset called EndorseAsset is created to individual endorse the contract between the member and the provider.
+Once the Service has been provided an other asset called EndorseAsset is created to individually endorse the contract between the member and the provider.
 ```
 {
   "$class": "org.example.biznet.EndorseAsset",
@@ -200,7 +206,7 @@ and intiates a Process claim transaction as below.
 
 The network validates for the following before adding the transaction to the Block Chain.
 1.)The Claim should not be in CLOSED status.
-2.)The Claim shuld be raised and existing in the network.
+2.)The Claim should be raised and existing in the network.
 3.)The Benefit Status asset exists in the network.
 4.)The Benefit Status is in CLOSE state
 ```
