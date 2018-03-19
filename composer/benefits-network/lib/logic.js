@@ -10,7 +10,6 @@ function updateBenefitStatusRegistry(benefitTransac){
     .then(function(benefitStatusRegistry) {
         return benefitStatusRegistry.update(ben)
             var factory = getFactory();
-        
             var benefitStatusEvent = factory.newEvent('org.example.biznet', 'eventMessage');
             benefitStatusEvent.message = "Benefit Status " + ben.Id + " updated"
             emit(benefitStatusEvent);
@@ -18,9 +17,7 @@ function updateBenefitStatusRegistry(benefitTransac){
 })
 }
 
-function checkEndorsementsandUpdate(ben,mem,agen,benefitTransac){
-
-    
+function checkEndorsementsandUpdate(ben,mem,agen,benefitTransac){   
    //Verify if asset has been endorsed
    var endorseArr = new Array()
    return getAssetRegistry('org.example.biznet.EndorseAsset')
@@ -117,13 +114,11 @@ else {ben.description = "You are trying to contact the  wrong nodal agency.Pleas
 else {throw new Error('this transaction failed, benefit Status is closed cannot change status.Contact Nodal Agency ');}
 }
 
-
 /**
  * Process claim
  * @param {org.example.biznet.ProcessClaim} processClaim - the claim
  * @transaction
  */
-
 
 function processClaimRequest(processClaim) {
     //Verify if claim is already closed
