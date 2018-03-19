@@ -1,5 +1,59 @@
 'use strict';
 
+function updateBenefitStatusRegistry(benefitTransac){
+    var ben = benefitTransac.benefitStatus;
+    ben.status = benefitTransac.status;
+    ben.provider = benefitTransac.provider;
+    ben.description = benefitTransac.description;
+    ben.statusUpdatedBy = benefitTransac.statusUpdatedBy;
+    return getAssetRegistry('org.example.biznet.BenefitStatus')
+    .then(function(benefitStatusRegistry) {
+        return benefitStatusRegistry.update(ben)
+            var factory = getFactory();
+        
+            var benefitStatusEvent = factory.newEvent('org.example.biznet', 'eventMessage');
+            benefitStatusEvent.message = "Benefit Status " + ben.Id + " updated"
+            emit(benefitStatusEvent);
+        
+})
+}
+
+function checkEndorsementsandUpdate(ben,mem,agen,benefitTransac){
+
+    
+   //Verify if asset has been endorsed
+   var endorseArr = new Array()
+   return getAssetRegistry('org.example.biznet.EndorseAsset')
+   .then(function(endorseAssetRegistry){                   
+       return endorseAssetRegistry.getAll();
+   }).then(function(endorseAssets){
+       endorseAssets.forEach(function(endorse){
+           var check_bs_id = endorse.benefitStatusId == ben.Id && endorse.status=='ENDORSED'
+           if(check_bs_id == true &&  endorse.EndorsedBy == agen.Id)
+
+               {
+                   endorseArr.push(endorse.EndorsedBy)
+                      
+               }
+           else if(check_bs_id == true &&  endorse.EndorsedBy == mem.Id){ 
+
+                   endorseArr.push(endorse.EndorsedBy)
+               }
+           });   
+           //If endorsed by both member and agency                
+           if(endorseArr.includes(mem.Id) && endorseArr.includes(agen.Id)){
+               //update 
+               updateBenefitStatusRegistry(benefitTransac)
+           }
+
+           else if(endorseArr.length > 0){
+               throw new Error('Only ' + endorseArr + ' has endorsed.Cannot close');
+       }
+       else{
+           throw new Error('This transaction failed.No member endorsed this asset.Cannot close'); 
+       }       
+})
+            }
 
 /**
  * Assign and Change Benefit Status
@@ -38,58 +92,11 @@ function updateBenefitStatus(benefitTransac) {
             ben.status = benefitTransac.status;
             if(ben.status == "CLOSE"){
                 //Verify if asset has been endorsed
-                var endorseArr = new Array()
-                return getAssetRegistry('org.example.biznet.EndorseAsset')
-                .then(function(endorseAssetRegistry){                   
-                    return endorseAssetRegistry.getAll();
-                }).then(function(endorseAssets){
-                    endorseAssets.forEach(function(endorse){
-                        var check_bs_id = endorse.benefitStatusId == ben.Id && endorse.status=='ENDORSED'
-                        if(check_bs_id == true &&  endorse.EndorsedBy == agen.Id)
-
-                            {
-                                endorseArr.push(endorse.EndorsedBy)
-                                   
-                            }
-                        else if(check_bs_id == true &&  endorse.EndorsedBy == mem.Id){ 
-
-                                endorseArr.push(endorse.EndorsedBy)
-                            }
-                        });   
-                        //If endorsed by both member and agency                
-                        if(endorseArr.includes(mem.Id) && endorseArr.includes(agen.Id)){
-                            ben.provider = benefitTransac.provider;
-                            ben.description = benefitTransac.description;
-                            ben.statusUpdatedBy = benefitTransac.statusUpdatedBy;
-                            return getAssetRegistry('org.example.biznet.BenefitStatus')
-                            .then(function(benefitStatusRegistry) {
-                            return benefitStatusRegistry.update(ben)
-                            }) 
-                        }
-    
-                        else if(endorseArr.length > 0){
-                            throw new Error('Only ' + endorseArr + ' has endorsed.Cannot close');
-                    }
-                    else{
-                        throw new Error('This transaction failed.No member endorsed this asset.Cannot close'); 
-                    }       
-            })
+                return checkEndorsementsandUpdate(ben,mem,agen,benefitTransac)
             }
              else {
                  //Update asset
-            ben.provider = benefitTransac.provider;
-            ben.description = benefitTransac.description;
-            ben.statusUpdatedBy = benefitTransac.statusUpdatedBy;
-            return getAssetRegistry('org.example.biznet.BenefitStatus')
-            .then(function(benefitStatusRegistry) {
-                return benefitStatusRegistry.update(ben)
-                    var factory = getFactory();
-                
-                    var benefitStatusEvent = factory.newEvent('org.example.biznet', 'eventMessage');
-                    benefitStatusEvent.message = "Benefit Status " + ben.Id + " updated"
-                    emit(benefitStatusEvent);
-                
-        })
+                 updateBenefitStatusRegistry(benefitTransac)
     }
     }
     else {throw new Error('this transaction failed, beneficiary not eligible ');}
