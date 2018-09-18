@@ -6,4 +6,4 @@ Each node should succeed in achieving consensus with a network in which its peer
 
 Each node will be given its list of followees via an array whose indices correspond to nodes in the graph and a list of transactions (its proposal list) that it can broadcast to its followers.
 
-In testing, the network may encounter a number (up to 45%) of malicious nodes that do not cooperate with the consensus algorithm. Malicious nodes may have arbitrary behavior like  broadcasting its own set of transactions, the network withstands  as many malicious nodes as possible and still achieve consensus.It also identifies and notifies about the malicious and transactions.
+In testing, the network may encounter a number (up to 45%) of malicious nodes that do not cooperate with the consensus algorithm. Malicious nodes may have arbitrary behavior like  broadcasting its own set of transactions, the network withstands  as many malicious nodes as possible and still achieve consensus.It also identifies and notifies about the malicious nodes and transactions.
