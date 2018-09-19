@@ -100,7 +100,7 @@ func setTrx(trx_map map[int][]int,trxArray []int,nodeId int){
 func setTrx_consensus(trx_map map[int][]int,trxArray_consensus []int,nodeId int){
 	 trx_map[nodeId] = trxArray_consensus
 	//write into channel
-
+	time.Sleep(time.Second * 4)
 	transactions_consensus <- trx_map
 }
 
@@ -146,8 +146,6 @@ func spinCompliantNodes(trxPool []int,nodeId int) []int{
 		trxArray  = checkMaliciousandGet(trxArray,followees,nodeId,trxPool)
 		trxArray_consensus = append(trxArray_consensus,trxArray...)
 
-
-
 	}
 
 	setTrx_consensus(trx_map ,trxArray_consensus,nodeId)
@@ -172,7 +170,7 @@ func spinMaliciousNodes(trxPool []int,nodeId int)[]int {
 	for i := 0; i < numRounds; i++ {
 		//Send a malicious transaction,not part of the valid pool.
 		//Probability is set by p_txDistribution and the number transaction set in the function.
-		trxPool := genTrxPool(5)
+		trxPool := genTrxPool(1)
 		trxArray := append(trxArray,trxPool...)
 		setTrx(trx_map,trxArray, nodeId)
 		//trxArray = getTrx(trxArray,followees,nodeId)
