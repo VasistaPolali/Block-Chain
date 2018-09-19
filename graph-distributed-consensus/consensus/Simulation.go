@@ -10,7 +10,7 @@ import (
 )
 
 var wg = new(sync.WaitGroup)
-var numNodes,_ = strconv.Atoi(os.Args[1]) //
+var numNodes,_ = strconv.Atoi(os.Args[1])
 var numRounds,_ = strconv.Atoi(os.Args[2])
 
 //Below values are set on the probablity line; 0 to 1
