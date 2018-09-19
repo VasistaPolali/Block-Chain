@@ -8,6 +8,11 @@ Each node will be given its list of followees via an array whose indices corresp
 
 In testing, the network may encounter a number (up to 45%) of malicious nodes that do not cooperate with the consensus algorithm. Malicious nodes may have arbitrary behavior like  broadcasting its own set of transactions, the network withstands  as many malicious nodes as possible and still achieve consensus.It also identifies and notifies about the malicious nodes and transactions.
 
+```
+To run:
+go run Simulation.go <number of nodes> <number of rounds> <p_graph> <p_malicious> <p_txDistribution>
+```
+
 # The simulation algorithm does the following.
 - Spins nodes as concurrent goroutines that will form the p2p network.
 - Most of the nodes are good nodes that are compliant.
@@ -22,7 +27,7 @@ In testing, the network may encounter a number (up to 45%) of malicious nodes th
   - For each round,the nodes read transactions sent by the followees from the channel, check their validity aginst the initial pool and set the transactions in the channel for it's followers to read.
   - Any transactions that are not part of the pool are not written to the channel and the node is notified as malicious.
   
-  # Compliant node:
+  # Malicious node:
   - Malicious node does all of the above and also genrate invalid transactions with it's own instance of the getInitialTrxArray().  
 
 
