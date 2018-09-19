@@ -15,7 +15,7 @@ var numRounds,_ = strconv.Atoi(os.Args[2])
 
 //Below values are set on the probablity line; 0 to 1
 var p_graph,_ = strconv.ParseFloat(os.Args[3],64) // parameter for random graph: prob. that an edge will exist
-var p_malicious,_ = strconv.ParseFloat(os.Args[4],64) // prob. that a node will be set to be malicious
+var p_malicious,_ = strconv.ParseFloat(os.Args[4],64) // probability  that a node will be set to be malicious
 var p_txDistribution,_ = strconv.ParseFloat(os.Args[5],64) // probability of assigning an initial transaction to each node
 
 
@@ -113,11 +113,11 @@ func checkMaliciousandGet(trxArray [] int,followees []int,nodeId int,trxPool[]in
 		for et := range transactions{
 			for ind,n:= range et[ef]{
 				if (isInArray(n,trxPool)==false){
-					//fmt.Println(nodeId,":Transaction ",n, " from ",ef," seems maliciuous")
+					fmt.Println("Node ",nodeId," beleives transaction ",n, " received from node ",ef," is maliciuous")
 					removeIndex(et[ef],ind)
 				}
 			}
-			//aapend transacs to array
+			//append transactions to array
 
 			trxArray = append(trxArray,et[ef]...)
 
@@ -135,8 +135,7 @@ func spinCompliantNodes(trxPool []int,nodeId int) []int{
 	trxArray := getInitialTrxArray(trxPool)
 	followees := setFollowees(nodeId)
 
-	//fmt.Println(nodeId,": ",followees)
-	fmt.Println("C: ",nodeId,)
+	fmt.Println("Node ",nodeId," is following ",followees)
 
 	for i := 0; i < numRounds; i++ {
 		//fmt.Println(nodeId," C: ",i)
@@ -164,8 +163,7 @@ func spinMaliciousNodes(trxPool []int,nodeId int)[]int {
 	trxArray := getInitialTrxArray(trxPool)
 	followees := setFollowees(nodeId)
 
-	//fmt.Println(nodeId,": ",followees)
-	fmt.Println("M: ",nodeId,)
+	fmt.Println("Node ",nodeId," is following ",followees)
 
 	for i := 0; i < numRounds; i++ {
 		//Send a malicious transaction,not part of the valid pool.
@@ -212,6 +210,8 @@ func main() {
 	close(transactions_consensus)
 	close(transactions)
     //Get the final set of transactions that each node beleives consensus on to a channel
+
+	fmt.Println("Set of transactions that nodes beleive consensus on as Key:Array[Value] pairs:")
 	for e:= range transactions{
 			print(e)
 
